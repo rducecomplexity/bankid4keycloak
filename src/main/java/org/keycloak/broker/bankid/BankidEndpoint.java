@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -97,11 +98,12 @@ public class BankidEndpoint {
 		try {
 			AuthResponse authResponse;
 			if (request.getSession().getAttribute("bankid.authresponse") == null) {
-				String ipAddress = request.getHeader("X-FORWARDED-FOR");
+				String ipAddress = request.getHeader("X-Client-IP");
 				if (ipAddress == null) {
 					ipAddress = request.getRemoteAddr();
 				}
 				logger.log(Logger.Level.INFO, "handling request with enduserip" + ipAddress);
+
 				authResponse = bankidClient.sendAuth(nin, ipAddress);
 				request.getSession().setAttribute("bankid.authresponse", authResponse);
 			} else {
