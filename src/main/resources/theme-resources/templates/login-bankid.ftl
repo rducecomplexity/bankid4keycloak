@@ -30,7 +30,7 @@
 				<#if showqr == true>
 				<div id="qrcode" style="box-sizing: border-box; display: flex; align-items: stretch; flex-direction: column; flex-shrink: 0; border-style: solid; border-width: 0px; position: relative; z-index: 0; min-height: 0px; min-width: 0px; margin-bottom: 40px; width: 100%;">
 					<div style="flex: 1 1 0%; text-align: center;">
-						<img src="qrcode"/>
+						<img src="qrcode" style="display:block; margin:auto;"/>
 					</div>
 				</div>
 				</#if>
