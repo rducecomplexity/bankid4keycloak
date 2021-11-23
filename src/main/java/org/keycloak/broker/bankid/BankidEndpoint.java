@@ -97,7 +97,11 @@ public class BankidEndpoint {
 		try {
 			AuthResponse authResponse;
 			if (request.getSession().getAttribute("bankid.authresponse") == null) {
-				authResponse = bankidClient.sendAuth(nin, request.getRemoteAddr());
+				String ipAddress = request.getHeader("X-FORWARDED-FOR");
+				if (ipAddress == null) {
+					ipAddress = request.getRemoteAddr();
+				}
+				authResponse = bankidClient.sendAuth(nin, ipAddress);
 				request.getSession().setAttribute("bankid.authresponse", authResponse);
 			} else {
 				authResponse = (AuthResponse) request.getSession().getAttribute("bankid.authresponse");
