@@ -102,8 +102,6 @@ public class BankidEndpoint {
 				if (ipAddress == null) {
 					ipAddress = request.getRemoteAddr();
 				}
-				logger.log(Logger.Level.INFO, "handling request with enduserip" + ipAddress);
-
 				authResponse = bankidClient.sendAuth(nin, ipAddress);
 				request.getSession().setAttribute("bankid.authresponse", authResponse);
 			} else {
